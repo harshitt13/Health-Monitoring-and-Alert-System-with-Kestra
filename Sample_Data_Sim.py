@@ -3,8 +3,8 @@ import random
 
 #random data generation
 patient_data = {
-    "heart_rate":random.randint(70, 120, 1000),
-    "glucose_level":random.randint(60, 120, 1000)
+    "heart_rate":[random.randint(70, 120) for _ in range(1000)],
+    "glucose_level":[random.randint(60, 120) for _ in range(1000)]
 }
 
 #write data to json file
