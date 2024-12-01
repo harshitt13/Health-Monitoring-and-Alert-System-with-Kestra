@@ -48,3 +48,5 @@ In your Kestra YAML configuration file, replace the placeholders with your Twili
 ### 4. Define the Workflow
 
 Create a `.yml` file (e.g., `health-monitoring.yml`) with the configuration from health_alert.yml
+
+### NOTE - This code is simulated data using `data_processing.py`, if you want to use it with IoT Devices (like, Arduino Uno) then configure `arduino.cpp` with the `main.py` file.
