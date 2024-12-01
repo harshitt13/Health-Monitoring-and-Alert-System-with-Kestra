@@ -2,9 +2,9 @@ id: health-alerts
 namespace: health.monitoring
 inputs:
   - name: heart_rate
-    type: text
+    type: INT
   - name: glucose_level
-    type: text
+    type: INT
 
 tasks:
   - id: check-critical-levels
@@ -13,21 +13,18 @@ tasks:
       - |
         heart_rate={{ inputs.heart_rate }}   # Ensure these are the inputs to the script
         glucose_level={{ inputs.glucose_level }}
-        
+
         echo "Heart Rate: $heart_rate"
         echo "Glucose Level: $glucose_level"
 
   - id: send-alert
-    type: io.kestra.core.tasks.scripts.Http
+    type: io.kestra.core.tasks.http.Http
     url: https://api.twilio.com/2010-04-01/Accounts/{{ twilio_account_sid }}/Messages.json
     method: POST
     headers:
-      Authorization: Basic {{ "YourTwilioAuthToken" | base64 }}  # Ensure this is Base64 encoded
+      Authorization: Basic {{ "YourTwilioAuthToken" | base64 }} # Ensure this is Base64 encoded
     body:
-    To: "{{ recipient_phone_number }}"   # Make sure the placeholder is enclosed in double quotes
-    From: "{{ your_twilio_phone_number }}"  # Ensure correct formatting of placeholders
+    To: "{{ recipient_phone_number }}" # Make sure the placeholder is enclosed in double quotes
+    From: "{{ your_twilio_phone_number }}" # Ensure correct formatting of placeholders
     Body: >
-      Critical Alert Detected:
-      Heart Rate: {{ inputs.heart_rate }} bpm,
-      Glucose Level: {{ inputs.glucose_level }} mg/dL.
-
+      Critical Alert Detected: Heart Rate: {{ inputs.heart_rate }} bpm, Glucose Level: {{ inputs.glucose_level }} mg/dL.
