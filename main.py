@@ -18,16 +18,16 @@ model = load_model()
 
 # Trigger Kestra workflow
 def trigger_kestra_workflow(heart_rate, glucose_level):
-    kestra_endpoint = "http://localhost:8080/api/v1/executions"
-    workflow_id = "health-alerts"
-    namespace = "health.monitoring"
+    kestra_endpoint = "{{ kestra_endpoint }}"  # Replace with your Kestra API endpoint
+    workflow_id = "{{ workflow_id }}"  # Replace with your workflow ID
+    namespace = "{{ namespace }}"  # Replace with your namespace
 
     payload = {
         "namespace": namespace,
         "flowId": workflow_id,
         "inputs": {
-            "heart_rate": heart_rate,
-            "glucose_level": glucose_level
+            "heart_rate": str(heart_rate),  # Ensure it's a string
+            "glucose_level": str(glucose_level)  # Ensure it's a string
         }
     }
 
@@ -44,5 +44,7 @@ def trigger_kestra_workflow(heart_rate, glucose_level):
     except Exception as e:
         print("Error triggering Kestra workflow:", str(e))
 
+"""
 # Example usage
 trigger_kestra_workflow(heart_rate=190, glucose_level=400)
+"""
