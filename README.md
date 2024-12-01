@@ -39,33 +39,4 @@ In your Kestra YAML configuration file, replace the placeholders with your Twili
 
 ### 4. Define the Workflow
 
-Create a `.yml` file (e.g., `health-monitoring.yml`) with the following configuration:
-
-```yaml
-id: health-alerts
-namespace: health.monitoring
-inputs:
-  - name: heart_rate
-    type: integer  # Change to integer to match heart rate
-  - name: glucose_level
-    type: integer  # Change to integer to match glucose level
-tasks:
-  - id: check-critical-levels
-    type: io.kestra.core.tasks.scripts.Bash
-    commands:
-      - |
-        heart_rate={{ inputs.heart_rate }}
-        glucose_level={{ inputs.glucose_level }}
-        echo "Heart Rate: $heart_rate"
-        echo "Glucose Level: $glucose_level"
-
-  - id: send-alert
-    type: io.kestra.core.tasks.http.Http
-    url: https://api.twilio.com/2010-04-01/Accounts/{{ twilio_account_sid }}/Messages.json
-    method: POST
-    headers:
-      Authorization: Basic "{{ 'YourTwilioAuthToken' | base64 }}"
-    body:
-      To: "{{ recipient_phone_number }}"  # Replace with recipient phone number
-      From: "{{ your_twilio_phone_number }}"  # Replace with your Twilio number
-      Body: "Critical Alert Detected:\nHeart Rate: {{ inputs.heart_rate }} bpm\nGlucose Level: {{ inputs.glucose_level }} mg/dL"
+Create a `.yml` file (e.g., `health-monitoring.yml`) with the configuration from health_alert.yml
