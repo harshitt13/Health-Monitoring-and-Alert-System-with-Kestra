@@ -1,3 +1,5 @@
+<div align="center">
+
 # Health Monitoring and Alert System with Kestra
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/harshitt13/Smart_Health_Care_Automated_System)
@@ -5,6 +7,8 @@
 ![GitHub stars](https://img.shields.io/github/stars/harshitt13/Smart_Health_Care_Automated_System)
 
 This project uses Kestra to monitor health data such as heart rate and glucose levels. When critical levels are detected, an SMS alert is sent using Twilio's messaging API.
+
+</div>
 
 ## Overview
 
