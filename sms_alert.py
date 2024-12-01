@@ -1,9 +1,7 @@
 from twilio.rest import Client
 
 def send_sms_alert(heart_rate, glucose_level):
-    """
-    Send an SMS alert for critical levels.
-    """
+    # Send an SMS alert for critical levels.
     # Replace with your Twilio credentials
     account_sid = "your_account_sid"
     auth_token = "your_auth_token"
