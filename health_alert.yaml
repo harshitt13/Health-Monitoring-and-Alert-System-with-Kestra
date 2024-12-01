@@ -1,0 +1,21 @@
+id: health-alerts
+namespace: health.monitoring
+inputs:
+  - name: heart_rate
+    type: int
+  - name: glucose_level
+    type: int
+tasks:
+  - id: send-alert
+    type: io.kestra.core.tasks.scripts.Http
+    url: https://api.twilio.com/2010-04-01/Accounts/{{ twilio_account_sid }}/Messages.json
+    method: POST
+    headers:
+      Authorization: Basic {{ twilio_auth_token | base64 }}
+    body:
+      To: "+1234567890" # Replace with recipient's phone number
+      From: "{{ twilio_phone_number }}" # Replace with your Twilio number
+      Body: >
+        Alert! Critical health condition detected:
+        Heart Rate: {{ inputs.heart_rate }} bpm
+        Glucose Level: {{ inputs.glucose_level }} mg/dL
