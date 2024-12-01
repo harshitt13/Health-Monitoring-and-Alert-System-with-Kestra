@@ -1,8 +1,11 @@
 # Twilio library for sending SMS
 twilio==7.24.0
 
-# Kestra Python SDK (if you're using it, else remove this)
+# Kestra Python SDK
 kestra-client==1.0.0
 
 # Additional dependencies if required by your environment (e.g., HTTP requests for testing)
 requests==2.31.0
+
+# To train ml model
+scikit-learn==1.5.2
